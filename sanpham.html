@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trang chủ - VƯỜN HOA CỦA NẮNG</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fff9f5;
+      color: #333;
+    }
+    header {
+      background-color: #d574c7;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      position: relative;
+    }
+    h1 {
+      margin: 0;
+    }
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
+    }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .product {
+      background-color: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+    .product:hover {
+      transform: scale(1.02);
+    }
+    .product img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    .product-content {
+      padding: 15px;
+    }
+    .product-content h3 {
+      margin: 0;
+      font-size: 1.1rem;
+    }
+    .price {
+      color: #242121;
+      font-weight: bold;
+      margin-top: 5px;
+    }
+    .order-btn {
+      margin-top: 10px;
+      background-color: #e786e8;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+    }
+    .order-btn:hover {
+      background-color: #d63a3a;
+    }
+    .cart-icon {
+      position: absolute;
+      top: 50px;
+      right: 20px;
+      background: white;
+      color: #e63946;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    }
+    #cart-items {
+      list-style: none;
+      padding-left: 0;
+    }
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px 0;
+    }
+    .remove-btn {
+      background: #e63946;
+      border: none;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<div id="loginModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999; justify-content: center; align-items: center;">
+  <div style="background: rgb(240, 238, 241); padding: 30px; border-radius: 10px; width: 100%; max-width: 400px; position: relative;">
+    <h2 style="margin-top: 0; color: #080202;">Tìm Kiếm Sản Phẩm</h2>
+    <form onsubmit="handleLogin(event)">
+      <label>Nhập Sản Phẩm:</label><br/>
+      <input type="text" required style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border-radius: 5px; border: 1px solid #ccc;"><br/>
+      <button type="submit" style="width: 100%; padding: 10px; background: #e63946; color: white; border: none; border-radius: 5px;">Tìm Kiếm</button>
+    </form>
+  </div>
+</div>
+<script>
+  function toggleLogin() {
+    const modal = document.getElementById("loginModal");
+    modal.style.display = modal.style.display === "flex" ? "none" : "flex";
+    if (modal.style.display === "flex") {
+      modal.scrollIntoView({ behavior: "smooth" });
+    }
+  }
+  
+  document.getElementById("loginModal").style.display = "none";
+  document.getElementById("loginModal").style.display = "flex";
+  document.getElementById("loginModal").style.display = "none";
+</script>
+<body>
+  <header>
+   <h1 class="banner-title">VƯỜN HOA CỦA NẮNG XIN CHÀO</h1>
+<p class="banner-subtitle">Mỗi bông hoa là một nụ cười của thiên nhiên!</p>
+    <div style="position:absolute; top:20px; right:30px; display:flex; flex-direction:column; gap:20px;">
+  <button onclick="toggleLogin()"
+    style="padding:10px 20px; background:#fff; color:#e63946; border:none; border-radius:5px; cursor:pointer;">
+    🔍 Tìm kiếm
+  </button>
+  <div class="cart-icon" onclick="toggleCart()">
+    🛒(<span id="cart-count">0</span>)
+  </div>
+</div>
+
+
+  </header>
+  <div class="section-divider">
+    HOA TƯƠI
+</div>
+
+  <div class="container">
+    <div class="product-grid">
+      <div class="product">
+         <a href="sanpham1.html">
+        <img src="hinhanh/ht1.webp" alt="Hoa Tươi Litte Rose Tana" /></a>
+        <div class="product-content">
+          <h3>Hoa Tươi Litte Rose Tana</h3>
+          <p class="price">320.000đ</p>
+          <button class="order-btn" onclick="addToCart('Hoa Tươi Litte Rose Tana', 320000)">Thêm vào giỏ</button></a>
+        </div>
+      </div>
+
+      <div class="product">
+         <a href="sanpham2.html">
+        <img src="hinhanh/ht2.jpg" alt="Hoa Thạch Thảo Trắng Garden" /></a>
+        <div class="product-content">
+          <h3>Hoa Thạch Thảo Trắng Garden</h3>
+          <p class="price">250.000đ</p>
+           <button class="order-btn" onclick="addToCart('Hoa Thạch Thảo Trắng Garden', 250000)">Thêm vào giỏ</button>
+          </a>
+        </div>
+      </div>
+      <div class="product">
+         <a href="sanpham3.html">
+        <img src="hinhanh/ht3.jpeg"  alt="Hoa Cam Spirrit"/></a>
+        <div class="product-content">
+          <h3>Hoa Cam Spirit</h3>
+          <p class="price">265.000đ</p>
+            <button class="order-btn" onclick="addToCart('Hoa Cam Spirit', 265000)">Thêm vào giỏ</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="product">
+        <a href="sanpham4.html">
+        <img src="hinhanh/ht4.webp" alt="Del Tana Beauty"/></a>
+        <div class="product-content">
+          <h3>Del Tana Beauty</h3>
+          <p class="price">450.000đ</p>
+           <button class="order-btn" onclick="addToCart('Del Tana Beauty', 450000)">Thêm vào giỏ</button>
+          </a>
+        </div>
+      </div>
+<div class="section-divider">
+    HOA SÁP
+</div>
+
+      <div class="product">
+         <a href="sanpham5.html">
+        <img src="hinhanh/ht5.jpg" alt="Bó hồng sáp thơm - Chỉ có em" /></a>
+        <div class="product-content">
+          <h3>Bó hồng sáp thơm - Chỉ có em</h3>
+          <p class="price">2.000.000đ</p>
+           <button class="order-btn" onclick="addToCart('Bó hồng sáp thơm - Chỉ có em', 2000000)">Thêm vào giỏ</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="product">
+         <a href="sanpham6.html">
+        <img src="hinhanh/ht6.jpg" alt="Bó hồng sáp thơm - Nắm chặt tay em"/></a>
+        <div class="product-content">
+          <h3>Bó hồng sáp thơm - Nắm chặt tay em</h3>
+          <p class="price">1.600.000đ</p>
+           <button class="order-btn" onclick="addToCart('Bó hồng sáp thơm - Nắm chặt tay em', 1600000)">Thêm vào giỏ</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="product">
+        <a href="sanpham7.html">
+        <img src="hinhanh/ht7.jpg" alt="Hoa Sáp MS55"/></a>
+        <div class="product-content">
+          <h3>Hoa Sáp MS55</h3>
+          <p class="price">700.000đ</p>
+           <button class="order-btn" onclick="addToCart('Hoa Sáp MS55', 700000)">Thêm vào giỏ</button>
+          </a>
+        </div>
+      </div>
+      <div class="product">
+        <a href="sanpham8.html">
+        <img src="hinhanh/ht8.jpg" alt="Bó Hoa Sáp Thơm – Món Quà Vĩnh Cửu"/></a>
+        <div class="product-content">
+          <h3>Bó Hoa Sáp Thơm – Món Quà Vĩnh Cửu</h3>
+          <p class="price">350.000đ</p>
+           <button class="order-btn" onclick="addToCart('Bó Hoa Sáp Thơm – Món Quà Vĩnh Cửu', 350000)">Thêm vào giỏ</button>
+          </a>
+        </div>
+      </div>
+<div class="section-divider">
+    HOA CƯỚI
+</div>
+
+      <div class="product">
+        <a href="sanpham9.html">
+        <img src="hinhanh/ht9.jpg" alt="Bó hoa cưới cầm tay tulip" /></a>
+        <div class="product-content">
+          <h3>Bó hoa cưới cầm tay tulip</h3>
+          <p class="price">1.500.000đ</p>
+           <button class="order-btn" onclick="addToCart('Bó hoa cưới cầm tay tulip', 1500000)">Thêm vào giỏ</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="product">
+        <a href="sanpham10.html">
+        <img src="hinhanh/ht10.jpeg" alt="Bó hoa cưới sen đá" /></a>
+        <div class="product-content">
+          <h3>Bó hoa cưới sen đá</h3>
+          <p class="price">1.200.000đ</p>
+           <button class="order-btn" onclick="addToCart('Bó hoa cưới sen đá', 1200000)">Thêm vào giỏ</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="product">
+        <a href="sanpham11.html">
+        <img src="hinhanh/ht11.webp" alt="Hoa Cưới New Beginning"/></a>
+        <div class="product-content">
+          <h3>Hoa Cưới New Beginning</h3>
+          <p class="price">2.590.000đ</p>
+           <button class="order-btn" onclick="addToCart('Hoa Cưới New Beginning', 2590000)">Thêm vào giỏ</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="product">
+        <a href="sanpham12.html">
+        <img src="hinhanh/ht12.webp" alt="Hoa Cưới Mao Lương Trắng" /></a>
+        <div class="product-content">
+          <h3>Hoa Cưới Mao Lương Trắng</h3>
+          <p class="price">2.540.000đ</p>
+           <button class="order-btn" onclick="addToCart('Hoa Cưới Mao Lương Trắng', 2540000)">Thêm vào giỏ</button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <h2>🧾 Giỏ Hàng</h2>
+    <ul id="cart-items"></ul>
+    <p><strong>Tổng cộng:</strong> <span id="cart-total">0</span> đ</p>
+  </div>
+
+  <script>
+    let cart = [];
+
+    function addToCart(name, price) {
+      const item = cart.find(i => i.name === name);
+      if (item) {
+        item.qty++;
+      } else {
+        cart.push({ name, price, qty: 1 });
+      }
+      saveCart();
+      updateCart();
+      alert(`Đã thêm "${name}" vào giỏ hàng.`);
+    }
+    function removeFromCart(name) {
+  cart = cart.filter(item => item.name !== name);
+  saveCart();
+  updateCart();
+}
+
+function increaseQty(name) {
+  const item = cart.find(i => i.name === name);
+  if (item) {
+    item.qty++;
+    saveCart();
+    updateCart();
+  }
+}
+
+function decreaseQty(name) {
+  const item = cart.find(i => i.name === name);
+  if (item) {
+    item.qty--;
+    if (item.qty <= 0) {
+      removeFromCart(name);
+    } else {
+      saveCart();
+      updateCart();
+    }
+  }
+}
+
+
+    function removeFromCart(name) {
+      cart = cart.filter(item => item.name !== name);
+      saveCart();
+      updateCart();
+     
+    }
+
+    function updateCart() {
+      const cartCount = document.getElementById('cart-count');
+      const cartItems = document.getElementById('cart-items');
+      const cartTotal = document.getElementById('cart-total');
+      
+      let total = 0;
+      let count = 0;
+      cartItems.innerHTML = '';
+
+      cart.forEach(item => {
+        count += item.qty;
+        total += item.qty * item.price;
+        const li = document.createElement('li');
+        li.className = 'cart-item';
+       li.innerHTML = `
+        <span>${item.name}</span>
+  <div class="qty-box">
+    <button onclick="decreaseQty('${item.name}')">−</button>
+    <span>${item.qty}</span>
+    <button onclick="increaseQty('${item.name}')">+</button>
+  </div>
+  <span>${(item.price * item.qty).toLocaleString()}đ</span>
+  <button class="remove-btn" onclick="removeFromCart('${item.name}')">Xóa</button>
+`;
+        cartItems.appendChild(li);
+      });
+
+      cartCount.textContent = count;
+      cartTotal.textContent = total.toLocaleString();
+    }
+
+    function saveCart() {
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    function loadCart() {
+      const saved = localStorage.getItem('cart');
+      if (saved) {
+        cart = JSON.parse(saved);
+        updateCart();
+      }
+    }
+
+    function toggleCart() {
+      alert('Xem giỏ hàng ngay bên dưới các sản phẩm nhé!');
+    }
+
+    loadCart();
+  </script>
+</body>
+</html>
